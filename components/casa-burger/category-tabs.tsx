@@ -1,19 +1,11 @@
 "use client"
 
-import { useState } from "react"
+import { comidaRapidaCategories, almuerzosCategories } from "@/lib/menu-data"
 
 const mainTabs = [
   { id: "comida-rapida", label: "Comida Rapida" },
   { id: "almuerzos", label: "Almuerzos" },
   { id: "info", label: "Info" },
-]
-
-const categories = [
-  { id: "burgers", label: "Burgers", icon: "🍔" },
-  { id: "perros", label: "Perros", icon: "🌭" },
-  { id: "otros", label: "Otros", icon: "🍗" },
-  { id: "papas", label: "Papas", icon: "🍟" },
-  { id: "bebidas", label: "Bebidas", icon: "🥤" },
 ]
 
 interface CategoryTabsProps {
@@ -29,6 +21,13 @@ export function CategoryTabs({
   onMainChange,
   onCategoryChange,
 }: CategoryTabsProps) {
+  const subcategories =
+    activeMain === "comida-rapida"
+      ? comidaRapidaCategories
+      : activeMain === "almuerzos"
+        ? almuerzosCategories
+        : []
+
   return (
     <div className="sticky top-[57px] z-40 bg-casa-dark/95 backdrop-blur-md pb-3 pt-4">
       {/* Main tabs */}
@@ -37,7 +36,7 @@ export function CategoryTabs({
           <button
             key={tab.id}
             onClick={() => onMainChange(tab.id)}
-            className={`flex-1 rounded-lg px-4 py-2.5 text-sm font-bold transition-all ${
+            className={`flex-1 rounded-lg px-3 py-2.5 text-sm font-bold transition-all ${
               activeMain === tab.id
                 ? "bg-casa-orange text-casa-dark"
                 : "bg-secondary text-foreground"
@@ -50,19 +49,19 @@ export function CategoryTabs({
       </div>
 
       {/* Subcategory pills */}
-      {activeMain === "comida-rapida" && (
+      {subcategories.length > 0 && (
         <div className="flex gap-2 overflow-x-auto scrollbar-hide px-4">
-          {categories.map((cat) => (
+          {subcategories.map((cat) => (
             <button
               key={cat.id}
               onClick={() => onCategoryChange(cat.id)}
-              className={`flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold transition-all ${
+              className={`flex shrink-0 items-center gap-1.5 rounded-full px-4 py-2 text-xs font-semibold transition-all ${
                 activeCategory === cat.id
                   ? "bg-casa-orange text-casa-dark"
                   : "bg-secondary text-foreground"
               }`}
             >
-              <span>{cat.icon}</span>
+              <span className="text-sm">{cat.icon}</span>
               {cat.label}
             </button>
           ))}

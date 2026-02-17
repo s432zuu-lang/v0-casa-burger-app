@@ -7,21 +7,23 @@ import { CategoryTabs } from "@/components/casa-burger/category-tabs"
 import { MenuSection } from "@/components/casa-burger/menu-section"
 import { InfoSection } from "@/components/casa-burger/info-section"
 import { WhatsAppFab } from "@/components/casa-burger/whatsapp-fab"
-import { menuItems, almuerzos } from "@/lib/menu-data"
+import { menuItems, almuerzoItems, categoryBanners } from "@/lib/menu-data"
 
 export default function CasaBurgerApp() {
   const [activeMain, setActiveMain] = useState("comida-rapida")
   const [activeCategory, setActiveCategory] = useState("burgers")
 
   const filteredItems = useMemo(() => {
-    if (activeMain === "almuerzos") return almuerzos
-    return menuItems.filter((item) => item.category === activeCategory)
+    if (activeMain === "comida-rapida") {
+      return menuItems.filter((item) => item.category === activeCategory)
+    }
+    if (activeMain === "almuerzos") {
+      return almuerzoItems.filter((item) => item.category === activeCategory)
+    }
+    return []
   }, [activeMain, activeCategory])
 
-  const notice =
-    activeMain === "comida-rapida" && activeCategory === "burgers"
-      ? "Todas las burgers incluyen papas a la francesa"
-      : undefined
+  const banner = categoryBanners[activeCategory]
 
   return (
     <div className="mx-auto min-h-screen max-w-md bg-background">
@@ -33,6 +35,7 @@ export default function CasaBurgerApp() {
         onMainChange={(id) => {
           setActiveMain(id)
           if (id === "comida-rapida") setActiveCategory("burgers")
+          if (id === "almuerzos") setActiveCategory("arma-tu-almuerzo")
         }}
         onCategoryChange={setActiveCategory}
       />
@@ -40,7 +43,7 @@ export default function CasaBurgerApp() {
       {activeMain === "info" ? (
         <InfoSection />
       ) : (
-        <MenuSection items={filteredItems} notice={notice} />
+        <MenuSection items={filteredItems} banner={banner} />
       )}
 
       <WhatsAppFab />
