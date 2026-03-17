@@ -56,37 +56,42 @@ export const categoryBanners: Record<string, CategoryBanner> = {
   burgers: {
     id: "burgers",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/495597784_18059509244156067_6959218874629851454_n-tu5WaS0o8qm8i0XfNmonMP5SIE9Gew.jpg",
-    notice: "Todas las burgers incluyen papas a la francesa.",
+    notice: "Lunes 4PM–11PM | Mar–Dom 11AM–11PM",
   },
   perros: {
     id: "perros",
     image: "/images/section-perros.jpg",
-    notice: "Disponibles Sencillo o Con Papas (+$1.000).",
+    notice: "Lunes 4PM–11PM | Mar–Dom 11AM–11PM · Sencillo o Con Papas (+$1.000)",
   },
   otros: {
     id: "otros",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/482081073_18053078198156067_7077819390944091041_n-VzNX5a4ffAFCUrloMzF4euz1IW1ioR.jpg",
+    notice: "Lunes 4PM–11PM | Mar–Dom 11AM–11PM",
   },
   papas: {
     id: "papas",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/482111952_18053147114156067_7714590438776273013_n-4hDpuZ9zkHUdWAujvppVIXKnunaQXH.jpg",
+    notice: "Lunes 4PM–11PM | Mar–Dom 11AM–11PM",
   },
   mazorcadas: {
     id: "mazorcadas",
     image: "/images/section-mazorcadas.jpg",
+    notice: "Lunes 4PM–11PM | Mar–Dom 11AM–11PM",
   },
   picadas: {
     id: "picadas",
     image: "/images/section-picadas.jpg",
+    notice: "Lunes 4PM–11PM | Mar–Dom 11AM–11PM",
   },
   bebidas: {
     id: "bebidas",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/490726952_1330613685085324_4240376153520147361_n-qW7D7mPp7f79W204nsWjqkLHd5L0zZ.jpg",
+    notice: "Lunes 4PM–11PM | Mar–Dom 11AM–11PM",
   },
   "arma-tu-almuerzo": {
     id: "arma-tu-almuerzo",
     image: "/images/section-almuerzo.jpg",
-    notice: "Disponible de Martes a Sabado. Incluyen Sopa, Arroz y Ensalada del dia.",
+    notice: "Disponible Martes a Sábado 11AM–3:30PM. Incluyen Sopa, Arroz y Ensalada del día.",
   },
   arroces: {
     id: "arroces",
@@ -119,7 +124,7 @@ export const categoryBanners: Record<string, CategoryBanner> = {
   "especiales-domingo": {
     id: "especiales-domingo",
     image: "/images/section-domingo.jpg",
-    notice: "Solo disponibles los domingos de 11AM a 3:30PM.",
+    notice: "Solo disponibles los Domingos 11AM–3:30PM",
   },
 }
 
