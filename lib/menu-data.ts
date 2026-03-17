@@ -10,8 +10,11 @@ export interface MenuItem {
   priceConPapas?: number
   price200g?: number
   price300g?: number
+  priceVaso?: number
+  priceLitro?: number
   category: string
   subcategory?: string
+  badge?: string
 }
 
 export interface SubCategory {
@@ -32,6 +35,8 @@ export const comidaRapidaCategories: SubCategory[] = [
   { id: "perros", label: "Perros", icon: "🌭" },
   { id: "otros", label: "Otros", icon: "🍗" },
   { id: "papas", label: "Papas", icon: "🍟" },
+  { id: "mazorcadas", label: "Mazorcadas", icon: "🌽" },
+  { id: "picadas", label: "Picadas", icon: "🫕" },
   { id: "bebidas", label: "Bebidas", icon: "🥤" },
 ]
 
@@ -51,7 +56,7 @@ export const categoryBanners: Record<string, CategoryBanner> = {
   burgers: {
     id: "burgers",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/495597784_18059509244156067_6959218874629851454_n-tu5WaS0o8qm8i0XfNmonMP5SIE9Gew.jpg",
-    notice: "Todas las burgers incluyen papas a la francesa. Disponibles en Pan o Tortilla (+$1.000).",
+    notice: "Todas las burgers incluyen papas a la francesa.",
   },
   perros: {
     id: "perros",
@@ -65,6 +70,14 @@ export const categoryBanners: Record<string, CategoryBanner> = {
   papas: {
     id: "papas",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/482111952_18053147114156067_7714590438776273013_n-4hDpuZ9zkHUdWAujvppVIXKnunaQXH.jpg",
+  },
+  mazorcadas: {
+    id: "mazorcadas",
+    image: "/images/section-mazorcadas.jpg",
+  },
+  picadas: {
+    id: "picadas",
+    image: "/images/section-picadas.jpg",
   },
   bebidas: {
     id: "bebidas",
@@ -106,7 +119,7 @@ export const categoryBanners: Record<string, CategoryBanner> = {
   "especiales-domingo": {
     id: "especiales-domingo",
     image: "/images/section-domingo.jpg",
-    notice: "Solo disponibles los domingos.",
+    notice: "Solo disponibles los domingos de 11AM a 3:30PM.",
   },
 }
 
@@ -118,8 +131,8 @@ export const menuItems: MenuItem[] = [
     id: "clasica",
     name: "Clasica",
     description: "1/4 lb carne o filete de pechuga, vegetales (cebolla grille, lechuga, tomate), jamon y queso",
-    pricePan: 23000,
-    priceTortilla: 24000,
+    pricePan: 24000,
+    priceTortilla: 25000,
     category: "burgers",
   },
   {
@@ -161,6 +174,7 @@ export const menuItems: MenuItem[] = [
     pricePan: 30000,
     priceTortilla: 31000,
     category: "burgers",
+    badge: "🔥 Lo Mas Pedido",
   },
   {
     id: "ranchera",
@@ -185,6 +199,7 @@ export const menuItems: MenuItem[] = [
     pricePan: 31000,
     priceTortilla: 32000,
     category: "burgers",
+    badge: "🔥 Lo Mas Pedido",
   },
 
   // ── PERROS CALIENTES ─────────────────────────────────────
@@ -238,11 +253,12 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: "perro-casa",
-    name: "Casa",
+    name: "De la Casa",
     description: "Salchicha americana, filete de pechuga, carne desmechada, tocineta, jamon y queso",
     priceSencillo: 29000,
     priceConPapas: 30000,
     category: "perros",
+    badge: "🔥 Lo Mas Pedido",
   },
 
   // ── OTROS PLATOS ─────────────────────────────────────────
@@ -257,7 +273,7 @@ export const menuItems: MenuItem[] = [
     id: "alitas-20",
     name: "Alitas x20",
     description: "20 piezas de alitas apanadas crujientes con salsas a eleccion",
-    price: 40000,
+    price: 48000,
     category: "otros",
   },
   {
@@ -396,6 +412,68 @@ export const menuItems: MenuItem[] = [
     category: "papas",
   },
 
+  // ── MAZORCADAS ───────────────────────────────────────────
+  {
+    id: "mazorcada-clasica",
+    name: "Mazorcada Clasica",
+    description: "Mazorca tierna con queso y salsas",
+    price: 19000,
+    category: "mazorcadas",
+  },
+  {
+    id: "mazorcada-texana",
+    name: "Mazorcada Texana",
+    description: "Mazorca con pollo desmechado, tocineta y queso",
+    price: 23000,
+    category: "mazorcadas",
+  },
+  {
+    id: "mazorcada-ranchera",
+    name: "Mazorcada Ranchera",
+    description: "Mazorca con chorizo, queso y salsas especiales",
+    price: 23000,
+    category: "mazorcadas",
+  },
+  {
+    id: "mazorcada-especial",
+    name: "Mazorcada Especial",
+    description: "Mazorca con mix de carnes y queso",
+    price: 25000,
+    category: "mazorcadas",
+  },
+  {
+    id: "mazorcada-casa",
+    name: "Mazorcada De la Casa",
+    description: "Especialidad de la casa sobre mazorca",
+    price: 25000,
+    category: "mazorcadas",
+    badge: "🔥 Lo Mas Pedido",
+  },
+
+  // ── PICADAS ──────────────────────────────────────────────
+  {
+    id: "picada-personal",
+    name: "Picada Personal",
+    description: "Mix de carnes, papas y acompañamientos para una persona",
+    price: 27000,
+    category: "picadas",
+  },
+  {
+    id: "picada-doble",
+    name: "Picada Doble",
+    description: "Mix de carnes, papas y acompañamientos para dos personas",
+    price: 38000,
+    category: "picadas",
+  },
+  {
+    id: "picada-casa",
+    name: "Picada De la Casa",
+    description: "Especialidad de la casa — mix completo de carnes premium y acompañamientos",
+    price: 45000,
+    category: "picadas",
+    badge: "🔥 Lo Mas Pedido",
+  },
+
   // ── BEBIDAS ──────────────────────────────────────────────
   {
     id: "gaseosa-personal",
@@ -405,16 +483,16 @@ export const menuItems: MenuItem[] = [
     category: "bebidas",
   },
   {
-    id: "gaseosa-1.5l",
-    name: "Gaseosa 1.5L",
-    description: "Botella tamano mediano",
+    id: "gaseosa-medio",
+    name: "Gaseosa ½ Litro",
+    description: "Botella de medio litro",
     price: 10000,
     category: "bebidas",
   },
   {
     id: "gaseosa-2.5l",
     name: "Gaseosa 2.5L",
-    description: "Botella tamano familiar",
+    description: "Botella tamaño familiar",
     price: 13000,
     category: "bebidas",
   },
@@ -427,9 +505,60 @@ export const menuItems: MenuItem[] = [
   },
   {
     id: "te-1l",
-    name: "Te 1L",
-    description: "Te helado de litro",
+    name: "Té 1L",
+    description: "Té helado de litro",
     price: 10000,
+    category: "bebidas",
+  },
+  {
+    id: "soda",
+    name: "Soda",
+    description: "Agua con gas",
+    price: 9000,
+    category: "bebidas",
+  },
+  {
+    id: "cerveza-nacional",
+    name: "Cerveza Nacional",
+    description: "Club Colombia, Águila, Poker u otras nacionales",
+    price: 5000,
+    category: "bebidas",
+  },
+  {
+    id: "cerveza-importada",
+    name: "Cerveza Importada",
+    description: "Corona, Heineken u otras importadas",
+    price: 7000,
+    category: "bebidas",
+  },
+  {
+    id: "cerveza-artesanal",
+    name: "Cerveza Artesanal",
+    description: "Selección de cervezas artesanales",
+    price: 9800,
+    category: "bebidas",
+  },
+  {
+    id: "michelada",
+    name: "Michelada",
+    description: "Mezcla para preparar michelada",
+    price: 4000,
+    category: "bebidas",
+  },
+  {
+    id: "granizada",
+    name: "Granizada",
+    description: "Granizada de sabores",
+    priceVaso: 8000,
+    priceLitro: 14000,
+    category: "bebidas",
+  },
+  {
+    id: "granizada-especial",
+    name: "Granizada Especial",
+    description: "Granizada especial con frutas naturales",
+    priceVaso: 8500,
+    priceLitro: 16500,
     category: "bebidas",
   },
 ]
@@ -457,7 +586,7 @@ export const almuerzoItems: MenuItem[] = [
   {
     id: "proteina-premium",
     name: "Proteina Premium",
-    description: "Alitas apanadas o Proteina del dia",
+    description: "Alitas apanadas",
     price: 17000,
     category: "arma-tu-almuerzo",
     subcategory: "Premium",
@@ -636,38 +765,19 @@ export const almuerzoItems: MenuItem[] = [
 
   // ── PARRILLA ─────────────────────────────────────────────
   {
-    id: "churrasco",
-    name: "Churrasco",
-    description: "Corte de 300g a la parrilla",
-    price: 30000,
+    id: "carne-asada",
+    name: "Carne Asada",
+    description: "Carne asada a la parrilla",
+    price200g: 26000,
+    price300g: 29000,
     category: "parrilla",
   },
   {
-    id: "carne-oreada",
-    name: "Carne Oreada",
-    description: "Corte de 300g, preparacion tradicional",
-    price: 30000,
-    category: "parrilla",
-  },
-  {
-    id: "sobrebarriga",
-    name: "Sobrebarriga",
-    description: "Corte de 300g a la parrilla",
-    price: 30000,
-    category: "parrilla",
-  },
-  {
-    id: "pincho-mixto",
-    name: "Pincho Mixto",
-    description: "Brocheta mixta de carnes a la parrilla",
-    price: 30000,
-    category: "parrilla",
-  },
-  {
-    id: "costillas-bbq",
-    name: "Costillas BBQ",
-    description: "Costillas banadas en salsa BBQ",
-    price: 30000,
+    id: "lomo-cerdo",
+    name: "Lomo de Cerdo",
+    description: "Lomo de cerdo a la parrilla",
+    price200g: 26000,
+    price300g: 29000,
     category: "parrilla",
   },
   {
@@ -687,19 +797,38 @@ export const almuerzoItems: MenuItem[] = [
     category: "parrilla",
   },
   {
-    id: "carne-asada",
-    name: "Carne Asada",
-    description: "Carne asada a la parrilla",
-    price200g: 26000,
-    price300g: 29000,
+    id: "churrasco",
+    name: "Churrasco",
+    description: "Corte de 300g a la parrilla",
+    price: 30000,
     category: "parrilla",
   },
   {
-    id: "lomo-cerdo",
-    name: "Lomo de Cerdo",
-    description: "Lomo de cerdo a la parrilla",
-    price200g: 26000,
-    price300g: 29000,
+    id: "sobrebarriga",
+    name: "Sobrebarriga",
+    description: "Corte de 300g a la parrilla",
+    price: 30000,
+    category: "parrilla",
+  },
+  {
+    id: "carne-oreada",
+    name: "Carne Oreada",
+    description: "Corte de 300g, preparacion tradicional",
+    price: 30000,
+    category: "parrilla",
+  },
+  {
+    id: "pincho-mixto",
+    name: "Pincho Mixto",
+    description: "Brocheta mixta de carnes a la parrilla",
+    price: 30000,
+    category: "parrilla",
+  },
+  {
+    id: "costillas-bbq",
+    name: "Costillas BBQ",
+    description: "Costillas banadas en salsa BBQ",
+    price: 30000,
     category: "parrilla",
   },
   {
@@ -708,6 +837,7 @@ export const almuerzoItems: MenuItem[] = [
     description: "Carne asada, oreada, sobrebarriga, pernil de pollo, chorizo + papa francesa, yuca frita, arepa amarilla y ensalada",
     price: 50000,
     category: "parrilla",
+    badge: "👥 Para Compartir",
   },
 
   // ── ESPECIALES DE DOMINGO ────────────────────────────────
@@ -726,16 +856,16 @@ export const almuerzoItems: MenuItem[] = [
     category: "especiales-domingo",
   },
   {
-    id: "sancocho-costilla",
-    name: "Sancocho de Costilla",
-    description: "Arroz, yuca, aguacate y costilla",
+    id: "sancocho-pollo",
+    name: "Sancocho de Pollo",
+    description: "Arroz, yuca, aguacate y pernil de pollo",
     price: 21000,
     category: "especiales-domingo",
   },
   {
-    id: "sancocho-pollo",
-    name: "Sancocho de Pollo",
-    description: "Arroz, yuca, aguacate y pernil de pollo",
+    id: "sancocho-costilla",
+    name: "Sancocho de Costilla",
+    description: "Arroz, yuca, aguacate y costilla",
     price: 21000,
     category: "especiales-domingo",
   },
