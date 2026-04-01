@@ -1,31 +1,96 @@
 "use client"
 
 import { ShoppingCart } from "lucide-react"
-import { useState } from "react"
 import type { MenuItem } from "@/lib/menu-data"
 
 function formatPrice(n: number) {
   return "$" + n.toLocaleString("es-CO")
 }
 
-export function MenuCard({ item }: { item: MenuItem }) {
-  const [added, setAdded] = useState(false)
+// Genera el mensaje de WhatsApp personalizado según la categoría y variantes del producto
+function getWhatsappMessage(item: MenuItem): string {
+  const nombre = item.name
 
-  const handleAdd = () => {
-    setAdded(true)
-    setTimeout(() => setAdded(false), 1200)
+  // Burgers — tienen variante pan/tortilla
+  if (item.pricePan !== undefined) {
+    return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir una Burger ${nombre}. ¿Me puedes ayudar con el pedido?`
   }
 
-  const whatsappText = encodeURIComponent(
-    `Hola MÍA, estoy viendo el menú web y quiero hacer un pedido.`
-  )
-  const whatsappUrl = `https://wa.me/573043396758?text=${whatsappText}`
+  // Perros calientes — tienen variante sencillo/con papas
+  if (item.priceSencillo !== undefined) {
+    return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir un Perro ${nombre}. ¿Me puedes ayudar con el pedido?`
+  }
 
+  // Parrilla — tienen variante 200g/300g
+  if (item.price200g !== undefined) {
+    return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir ${nombre} de la parrilla. ¿Me puedes ayudar con el pedido?`
+  }
+
+  // Granizadas — tienen variante vaso/litro
+  if (item.priceVaso !== undefined) {
+    return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir una ${nombre}. ¿Me puedes ayudar con el pedido?`
+  }
+
+  // Categorías específicas con artículo correcto
+  const articuloFemenino = [
+    "papas", "mazorcadas", "ensaladas", "picadas", "alitas",
+    "pasta", "lasana", "parrillada", "costillas", "sobrebarriga",
+    "carne", "cazuela", "granizada"
+  ]
+  const articuloMasculino = [
+    "perros", "arroces", "pollo", "pescados", "gyros",
+    "sandwich", "patacon", "arroz", "sancocho", "mute", "pincho", "churrasco", "robalo"
+  ]
+
+  const nombreLower = nombre.toLowerCase()
+  const categoriaLower = item.category.toLowerCase()
+
+  // Detectar artículo basado en nombre o categoría
+  let articulo = "un"
+  const esFemenino = articuloFemenino.some(f =>
+    nombreLower.includes(f) || categoriaLower.includes(f)
+  )
+  const esMasculino = articuloMasculino.some(m =>
+    nombreLower.includes(m) || categoriaLower.includes(m)
+  )
+
+  if (esFemenino) articulo = "una"
+  else if (esMasculino) articulo = "un"
+
+  // Casos especiales por categoría
+  if (categoriaLower === "bebidas") {
+    return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir ${articulo} ${nombre}. ¿Me puedes ayudar con el pedido?`
+  }
+
+  if (categoriaLower === "almuerzos" || categoriaLower === "arma-tu-almuerzo") {
+    return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir el almuerzo — ${nombre}. ¿Me puedes ayudar con el pedido?`
+  }
+
+  if (categoriaLower === "especiales-domingo") {
+    return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir ${articulo} ${nombre} (especial de domingo). ¿Me puedes ayudar con el pedido?`
+  }
+
+  if (categoriaLower === "parrilla") {
+    return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir ${articulo} ${nombre} de la parrilla. ¿Me puedes ayudar con el pedido?`
+  }
+
+  if (categoriaLower === "pescados") {
+    return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir ${articulo} ${nombre}. ¿Me puedes ayudar con el pedido?`
+  }
+
+  // Mensaje genérico con artículo detectado
+  return `Hola MÍA 😊 Estuve mirando el menú y me gustaría pedir ${articulo} ${nombre}. ¿Me puedes ayudar con el pedido?`
+}
+
+export function MenuCard({ item }: { item: MenuItem }) {
   const hasDualPrice =
     !!item.pricePan ||
     !!item.priceSencillo ||
     !!item.price200g ||
     !!item.priceVaso
+
+  const whatsappText = encodeURIComponent(getWhatsappMessage(item))
+  const whatsappUrl = `https://wa.me/573043396758?text=${whatsappText}`
 
   return (
     <div className="flex flex-col gap-2 rounded-xl bg-casa-card px-4 py-3.5 transition-colors hover:bg-casa-card-hover">
@@ -111,7 +176,7 @@ export function MenuCard({ item }: { item: MenuItem }) {
               </>
             )}
 
-            {/* Vaso / Litro (granizadas) */}
+            {/* Vaso / Litro */}
             {item.priceVaso !== undefined && (
               <>
                 <span className="flex items-center gap-1 rounded-full bg-secondary px-2.5 py-1">
